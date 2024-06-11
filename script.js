@@ -73,24 +73,28 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     let gameResult;
+    let backgroundColor;
 
     if ((humanChoice === rock && computerChoice === scissors) || (humanChoice === paper && computerChoice === rock) || (humanChoice === scissors && computerChoice === paper)) {
         gameResult = win;
+        backgroundColor = 'background-color: green';
     } else if (humanChoice === computerChoice) {
         gameResult = draw;
+        backgroundColor = 'background-color: blue';
     } else {
         gameResult = lost;
+        backgroundColor = 'background-color: red';
     }
 
-    console.groupCollapsed(gameResult);
+    console.groupCollapsed(`%c${gameResult}`, backgroundColor);
     console.log('Your choice: ', humanChoice);
     console.log('Computer choice: ', computerChoice);
     if (gameResult === win) {
         console.log(`${humanChoice} beats ${computerChoice}`);
     } else if (gameResult === draw) {
-        console.log(`${computerChoice} draw ${humanChoice}`)
+        console.log(`${computerChoice} draw ${humanChoice}`);
     } else {
-        console.log(`${computerChoice} beats ${humanChoice}`)
+        console.log(`${computerChoice} beats ${humanChoice}`);
     }
     console.groupEnd();
     return (gameResult);
@@ -98,6 +102,7 @@ function playRound(humanChoice, computerChoice) {
 
 function keepScore(gameResult) {
     let whoInLead;
+    let backgroundColor;
 
     if (gameResult === win) {
         ++humanScore;
@@ -111,21 +116,30 @@ function keepScore(gameResult) {
 
     if (humanScore === setRound) {
         whoInLead = 'Well done, you WON';
+        backgroundColor = 'background-color: darkgreen'
     } else if (computerScore === setRound) {
         whoInLead = 'You LOST, better luck next time';
+        backgroundColor = 'background-color: darkred'
     } else if (humanScore > computerScore) {
         whoInLead = 'You\'re winning';
+        backgroundColor = 'background-color: green'
     } else if (humanScore < computerScore) {
         whoInLead = 'You\'re loosing';
+        backgroundColor = 'background-color: red'
     } else if (humanScore === computerScore) {
         whoInLead = 'You\'re neck and neck';
+        backgroundColor = 'background-color: blue'
     }
 
-    console.groupCollapsed(`Your score: ${humanScore} vs Computer score: ${computerScore}. ${whoInLead}!`);
+    console.groupCollapsed(`%cYour score: ${humanScore} vs Computer score: ${computerScore}. ${whoInLead}!`, backgroundColor);
     console.log('Human score: ', humanScore);
     console.log('Computer score: ', computerScore);
     console.log('Result: ', gameResult);
     console.groupEnd();
+
+    if (computerScore === setRound || humanScore === setRound) {
+        console.warn('|------------ END GAME ------------|');
+    }
 }
 
 function playGame() {
@@ -137,7 +151,7 @@ function playGame() {
         keepScore(gameResult);
 
         if (humanScore === setRound || computerScore === setRound) {
-            restartGame();
+            setTimeout(restartGame(), 5000);
         } else if (humanScore < setRound && computerScore < setRound) {
             console.warn(`|------------ ROUND ${roundAmount} ------------|`)
             playGame();
@@ -159,7 +173,7 @@ function restartGame() {
         humanScore = humanScore * 0;
         computerScore = computerScore * 0;
         roundAmount = (roundAmount * 0) + 1;
-        console.warn('|------------ END GAME ------------|');
+        // console.warn('|------------ END GAME ------------|');
         console.warn('|------------ ROUND 1 ------------|')
         playGame();
     } else if (active = 'true') {
