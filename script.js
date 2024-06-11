@@ -112,7 +112,7 @@ function keepScore(gameResult) {
     if (humanScore === setRound) {
         whoInLead = 'Well done, you WON';
     } else if (computerScore === setRound) {
-        whoInLead = 'Better luck next time';
+        whoInLead = 'You LOST, better luck next time';
     } else if (humanScore > computerScore) {
         whoInLead = 'You\'re winning';
     } else if (humanScore < computerScore) {
@@ -150,21 +150,23 @@ function startGame() {
         playGame();
     } else {
         console.clear();
-        console.log('Till next time.')
+        console.log('Till next time.');
     }
 }
-startGame();
-
-console.warn('|------------ END GAME ------------|')
 
 function restartGame() {
     if (confirm('Another game?')) {
         humanScore = humanScore * 0;
         computerScore = computerScore * 0;
         roundAmount = (roundAmount * 0) + 1;
+        console.warn('|------------ END GAME ------------|');
         console.warn('|------------ ROUND 1 ------------|')
-        startGame();
+        playGame();
     } else if (active = 'true') {
         console.log('Till next Time.');
     }
 }
+
+startGame();
+
+console.warn('|------------ END GAME ------------|')
