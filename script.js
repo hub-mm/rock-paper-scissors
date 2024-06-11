@@ -6,152 +6,165 @@ const win = 'You won!';
 const lost = 'You lost!';
 const draw = 'That\'s a draw!';
 
-const winAgain = 'You got lucky this time... Let\'s go again?';
-const lostAgain = 'You gave it a good try... Let\'s go again?';
+const setRound = 3;
 
+console.warn('|------------ ROUND 1 ------------|')
 
-console.log('---------- Round 1 ----------')
-const inputHuman = getHumanChoice();
-const inputComputer = getComputerChoice();
-const inputGameLogic = getGameLogic();
-const inputScoreHuman = getScoreHuman();
-const inputScoreComputer = getScoreComputer();
+let humanScore = 0;
+let computerScore = 0;
+let roundAmount = 1;
 
-const newInputGame = newGame;
-const newInputHuman = getHumanChoice;
-const newInputComputer = getComputerChoice;
-// const newInputGameLogic = getGameLogic;
-const newInputScoreHuman = getScoreHuman;
-const newInputScoreComputer = getScoreComputer;
-
-let choiceComputer;
-let choiceHuman;
-let result;
-let newScoreHuman;
-let newScoreComputer;
-
-
-function getComputerChoice(choiceComputer) {
+function getComputerChoice() {
     let value = (Math.random() * 100) + 1;
+    let computerChoice;
+
     if (value < 33.33) {
-        choiceComputer = rock;
+        computerChoice = rock;
     } else if (value >= 33.33 && value < 66.66) {
-        choiceComputer = paper;
-    } else if (value >= 66.66) {
-        choiceComputer = scissors;
+        computerChoice = paper;
+    } else if (value > 66.66) {
+        computerChoice = scissors;
     }
-    console.groupCollapsed('Computer: ', choiceComputer);
+
+    console.groupCollapsed('Computer choice: ', computerChoice);
     console.log('Computer choice value: ', value);
-    console.log('Computer choice: ', choiceComputer);
     console.groupEnd();
-    return (choiceComputer)
+    return (computerChoice);
 }
 
-function getHumanChoice(choiceHuman) {
-    let input = prompt('Rock, paper, scissors... shooot!', '');
-    let inputNoCase = input.toLowerCase();
+function getHumanChoice() {
+    let input = prompt('Rock, paper, scissors... SHOOT!', '');
+    let inputNoCase;
+    let humanChoice;
+
+    if (input === null) {
+        inputNoCase = input;
+    } else {
+        inputNoCase = input.toLowerCase();
+    }
 
     if (inputNoCase === 'rock' || inputNoCase === 'r') {
-        choiceHuman = rock;
+        humanChoice = rock;
+        console.groupCollapsed('Your choice: ', humanChoice);
+        console.log('Your choice input: ', input);
+        console.groupEnd();
+        return (humanChoice);
     } else if (inputNoCase === 'paper' || inputNoCase === 'p') {
-        choiceHuman = paper;
+        humanChoice = paper;
+        console.groupCollapsed('Your choice: ', humanChoice);
+        console.log('Your choice input: ', input);
+        console.groupEnd();
+        return (humanChoice);
     } else if (inputNoCase === 'scissors' || inputNoCase === 's') {
-        choiceHuman = scissors;
+        humanChoice = scissors;
+        console.groupCollapsed('Your choice: ', humanChoice);
+        console.log('Your choice input: ', input);
+        console.groupEnd();
+        return (humanChoice);
     } else {
-        console.log('Till next time!');
-        return;
-    };
-    console.groupCollapsed('You: ', choiceHuman);
-    console.log('Your input: ', input);
-    console.log('Your choice: ', choiceHuman);
-    console.groupEnd();
-    return (choiceHuman);
-}
-
-function getGameLogic(result) {
-    if ((inputHuman === rock && inputComputer === scissors) || (inputComputer === scissors && inputHuman === rock)) {
-        result = win;
-        // setTimeout(getGameLogic, 1000);
-    } else if ((inputHuman === paper && inputComputer === rock) || (inputComputer === rock && inputHuman === paper)) {
-        result = win;
-        // setTimeout(getGameLogic, 1000);
-    } else if ((inputHuman === scissors && inputComputer === paper) || (inputComputer === paper && inputHuman === scissors)) {
-        result = win;
-        // setTimeout(getGameLogic, 1000);
-    } else if ((inputHuman === inputComputer) || (inputComputer === inputHuman)) {
-        result = draw;
-        // setTimeout(getGameLogic, 1000);
-    } else {
-        result = lost;
-        // setTimeout(getGameLogic, 1000);
-    }
-
-    console.groupCollapsed(result);
-    console.log('Result: ', result);
-    console.log('Human input: ', inputHuman);
-    console.log('Computer input: ', inputComputer);
-    console.groupEnd();
-    // setTimeout(getGameLogic, 1000);
-    // clearTimeout(getGameLogic);
-    // setTimeout(getGameLogic, 10);
-    // getGameLogic();
-    return (result);
-}
-
-
-function getScoreHuman(newScoreHuman) {
-    let scoreHuman = 0;
-
-    if (inputGameLogic === win) {
-        newScoreHuman = ++scoreHuman;
-    } else if (inputGameLogic === draw) {
-        newScoreHuman = ++scoreHuman;
-    } else {
-        scoreHuman;
-    }
-
-    console.groupCollapsed('Your score: ', scoreHuman);
-    console.log('Your score: ', newScoreHuman);
-    console.log('Result: ', inputGameLogic);
-    console.groupEnd();
-    return (newScoreHuman);
-}
-
-function getScoreComputer(newScoreComputer) {
-    let scoreComputer = 0;
-
-    if (inputGameLogic === lost) {
-        newScoreComputer = ++scoreComputer;
-    } else if (inputGameLogic === draw) {
-        newScoreComputer = ++scoreComputer;
-    } else {
-        scoreComputer;
-    }
-
-    console.groupCollapsed('Comupter score: ', scoreComputer);
-    console.log('Computer score: ', newScoreComputer);
-    console.log('Result: ', inputGameLogic);
-    console.groupEnd();
-    return (newScoreComputer);
-}
-
-function newGame() {
-    let restart = 'true';
-    if (restart === 'true') {
-        restart = confirm('Play another game?', '');
-        if (restart) {
-            console.log('---------- Round 2 ----------');
-            getHumanChoice();
-            getComputerChoice();
-            getGameLogic();
-            newInputScoreHuman();
-            newInputScoreComputer();
+        if (confirm('Are you sure you want to leave?')) {
+            console.log('Till next time.');
+            return null;
         } else {
-            console.log('Another time then.')
-
+            playGame();
         }
-        console.log(restart);
-        return;
     }
 }
-setTimeout(newGame, 1500);
+
+function playRound(humanChoice, computerChoice) {
+    let gameResult;
+
+    if ((humanChoice === rock && computerChoice === scissors) || (humanChoice === paper && computerChoice === rock) || (humanChoice === scissors && computerChoice === paper)) {
+        gameResult = win;
+    } else if (humanChoice === computerChoice) {
+        gameResult = draw;
+    } else {
+        gameResult = lost;
+    }
+
+    console.groupCollapsed(gameResult);
+    console.log('Your choice: ', humanChoice);
+    console.log('Computer choice: ', computerChoice);
+    if (gameResult === win) {
+        console.log(`${humanChoice} beats ${computerChoice}`);
+    } else if (gameResult === draw) {
+        console.log(`${computerChoice} draw ${humanChoice}`)
+    } else {
+        console.log(`${computerChoice} beats ${humanChoice}`)
+    }
+    console.groupEnd();
+    return (gameResult);
+}
+
+function keepScore(gameResult) {
+    let whoInLead;
+
+    if (gameResult === win) {
+        ++humanScore;
+        ++roundAmount;
+    } else if (gameResult === lost) {
+        ++computerScore;
+        ++roundAmount;
+    } else if (gameResult === draw) {
+        ++roundAmount;
+    }
+
+    if (humanScore === setRound) {
+        whoInLead = 'Well done, you WON';
+    } else if (computerScore === setRound) {
+        whoInLead = 'Better luck next time';
+    } else if (humanScore > computerScore) {
+        whoInLead = 'You\'re winning';
+    } else if (humanScore < computerScore) {
+        whoInLead = 'You\'re loosing';
+    } else if (humanScore === computerScore) {
+        whoInLead = 'You\'re neck and neck';
+    }
+
+    console.groupCollapsed(`Your score: ${humanScore} vs Computer score: ${computerScore}. ${whoInLead}!`);
+    console.log('Human score: ', humanScore);
+    console.log('Computer score: ', computerScore);
+    console.log('Result: ', gameResult);
+    console.groupEnd();
+}
+
+function playGame() {
+    const humanChoice = getHumanChoice();
+
+    if (humanChoice === rock || humanChoice === paper || humanChoice === scissors) {
+        const computerChoice = getComputerChoice();
+        const gameResult = playRound(humanChoice, computerChoice);
+        keepScore(gameResult);
+
+        if (humanScore === setRound || computerScore === setRound) {
+            restartGame();
+        } else if (humanScore < setRound && computerScore < setRound) {
+            console.warn(`|------------ ROUND ${roundAmount} ------------|`)
+            playGame();
+        }
+    }
+}
+
+function startGame() {
+    if (confirm(`Rock, Paper, Scissors? Best of ${setRound}?`)) {
+        playGame();
+    } else {
+        console.clear();
+        console.log('Till next time.')
+    }
+}
+startGame();
+
+console.warn('|------------ END GAME ------------|')
+
+function restartGame() {
+    if (confirm('Another game?')) {
+        humanScore = humanScore * 0;
+        computerScore = computerScore * 0;
+        roundAmount = (roundAmount * 0) + 1;
+        console.warn('|------------ ROUND 1 ------------|')
+        startGame();
+    } else if (active = 'true') {
+        console.log('Till next Time.');
+    }
+}
