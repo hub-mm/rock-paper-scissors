@@ -160,7 +160,7 @@ function playGame() {
 }
 
 function startGame() {
-    if (confirm(`Rock, Paper, Scissors? Best of ${setRound}?`)) {
+    if (confirm(`Rock, Paper, Scissors? First to ${setRound} wins?`)) {
         playGame();
     } else {
         console.clear();
@@ -173,7 +173,6 @@ function restartGame() {
         humanScore = humanScore * 0;
         computerScore = computerScore * 0;
         roundAmount = (roundAmount * 0) + 1;
-        // console.warn('|------------ END GAME ------------|');
         console.warn('|------------ ROUND 1 ------------|')
         playGame();
     } else if (active = 'true') {
