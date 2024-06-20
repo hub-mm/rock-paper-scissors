@@ -1,5 +1,116 @@
 html {
     background-color: black;
     color: white;
+}
+
+body {
     margin: 0 auto;
+    height: 100vh;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.header {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.061);
+
+    letter-spacing: 5px;
+    font-size: 12px;
+    font-weight: 100;
+    /* border: solid white 2px; */
+}
+
+.container-content {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    /* border: solid white 2px; */
+}
+
+.container-buttons {
+    height: 20%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    /* border: solid white 2px; */
+}
+
+.container-buttons button {
+    height: 100px;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.container-buttons button:hover {
+    color: white;
+    background-color: black;
+    box-shadow: 0 0 20px white;
+}
+
+.container-game-text {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    /* border: solid white 2px; */
+}
+
+.choice {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: space-evenly;
+
+    font-size: 24px;
+    font-weight: 900;
+    /* border: solid white 2px; */
+}
+
+.container-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    /* border: solid white 2px; */
+}
+
+.end-game {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.end-game button {
+    height: 30px;
+    width: 150px;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.end-game button:hover {
+    color: white;
+    background-color: black;
+    box-shadow: 0 0 20px white;
 }
