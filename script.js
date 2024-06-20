@@ -92,13 +92,8 @@ function startGame(hChoice) {
         const hScore = arrayScore[0];
         const cScore = arrayScore[1];
 
-        console.log('your choice: ', hChoice)
-        console.log('computer choice: ', cChoice);
-        console.log('results: ', gameResult);
-        console.log(arrayScore);
-
-        hChoiceText.textContent = `Your choice: ${hChoice}`;
-        cChoiceText.textContent = `Computer choice: ${cChoice}`
+        hChoiceText.textContent = `you: ${hChoice}`;
+        cChoiceText.textContent = `computer: ${cChoice}`
         gResult.textContent = gameResult;
         hPoint.textContent = `Your score: ${hScore}`;
         cPoint.textContent = `Computer score: ${cScore}`;
